@@ -27,12 +27,7 @@ then
 	exec sudo $0
 fi
 
-fail () {
 
-	echo "$NAME: failed to set $line to $COLOR"
-	exit 1
-
-}
 
 MACOSX_DEFAULT=("/Applications/App Store.app"
 "/Applications/Automator.app"
@@ -88,12 +83,22 @@ echo "$NAME: Checking default Mac OS X apps"
 
 for line in $MACOSX_DEFAULT
 do
-	CURRENT=$(display_colors.py "$line")
 
-	if [[ "$CURRENT" = "none" ]]
+	if [ -d "$line" ]
 	then
-			display_colors.py "$line" "$COLOR" && \
-			echo "$NAME: set $line:t to $COLOR"
+
+		# if you run this script on a different version of OS X or if you
+		# removed (!) one of the default apps, it might not be there. So we
+		# check, just in case.
+
+		CURRENT=$(display_colors.py "$line")
+
+		if [[ "$CURRENT" = "none" ]]
+		then
+				display_colors.py "$line" "$COLOR" && \
+				echo "$NAME: set $line:t to $COLOR"
+		fi
+
 	fi
 
 done
@@ -178,7 +183,7 @@ done
 # 	if [[ "$CURRENT" = "none" ]]
 # 	then
 # 			display_colors.py "$line" "$COLOR" && \
-# 			echo "$NAME: set $line to $COLOR" || fail
+# 			echo "$NAME: set $line to $COLOR"
 # 	fi
 #
 # done
@@ -202,7 +207,7 @@ done
 # 	if [[ "$CURRENT" = "none" ]]
 # 	then
 # 			display_colors.py "$line" "$COLOR" && \
-# 			echo "$NAME: set $line to $COLOR" || fail
+# 			echo "$NAME: set $line to $COLOR"
 #
 #
 #
