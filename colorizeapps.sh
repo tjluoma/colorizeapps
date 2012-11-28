@@ -7,6 +7,18 @@
 
 NAME="$0:t"
 
+if ((! $+commands[display_colors.py] ))
+then
+
+	# note: if display_colors.py is a function or alias, it will come back not found
+
+	echo "$NAME: display_colors.py is required but not found in $PATH.\nYou can get it at https://github.com/danthedeckie/display_colors"
+	exit 1
+
+fi
+
+
+
 if [ "$EUID" != "0" ]
 then
 	# Default OS X apps and Mac App Store apps are owned by root
