@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Set Finder colors for different types of apps
+# set Finder colors for different types of apps
 #
 # From:	Timothy J. Luoma
 # Mail:	luomat at gmail dot com
